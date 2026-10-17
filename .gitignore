@@ -1,0 +1,30 @@
+# 环境变量与密钥
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# uv
+.uv/
+
+# IDE
+.idea/
+.vscode/
+
+# macOS
+.DS_Store
+
+# 生成的数据文件
+claude-code-sdk/data/
+
+# 测试产物
+claude-code-sdk/test.txt
