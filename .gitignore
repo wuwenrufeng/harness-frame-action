@@ -28,3 +28,5 @@ claude-code-sdk/data/
 
 # 测试产物
 claude-code-sdk/test.txt
+
+claude-code-sdk/01_skilled/data
