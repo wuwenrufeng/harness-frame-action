@@ -1,0 +1,26 @@
+[
+  {
+    "agent_id": "ac5b07f7401959ed6",
+    "agent_type": "financial-analyzer",
+    "duration_seconds": 492.71,
+    "transcript": "/Users/wuwen/.claude/projects/-Users-wuwen-workspace-python-github-harness-frame-action-claude-code-sdk-04-hook/da3c0ad6-4a66-4754-b66a-7502e96c4704/subagents/agent-ac5b07f7401959ed6.jsonl",
+    "start_time": "2026-11-08T18:11:31.962178",
+    "end_time": "2026-11-08T18:19:44.670241"
+  },
+  {
+    "agent_id": "a67c9800aa86942f0",
+    "agent_type": "a-share-risk-alert",
+    "duration_seconds": 907.77,
+    "transcript": "/Users/wuwen/.claude/projects/-Users-wuwen-workspace-python-github-harness-frame-action-claude-code-sdk-04-hook/da3c0ad6-4a66-4754-b66a-7502e96c4704/subagents/agent-a67c9800aa86942f0.jsonl",
+    "start_time": "2026-11-08T18:11:35.469512",
+    "end_time": "2026-11-08T18:26:43.239196"
+  },
+  {
+    "agent_id": "abec8fc08d0120d1c",
+    "agent_type": "industry-news-collector",
+    "duration_seconds": 1014.01,
+    "transcript": "/Users/wuwen/.claude/projects/-Users-wuwen-workspace-python-github-harness-frame-action-claude-code-sdk-04-hook/da3c0ad6-4a66-4754-b66a-7502e96c4704/subagents/agent-abec8fc08d0120d1c.jsonl",
+    "start_time": "2026-11-08T18:11:40.218946",
+    "end_time": "2026-11-08T18:28:34.230387"
+  }
+]

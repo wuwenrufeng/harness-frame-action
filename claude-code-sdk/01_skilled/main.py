@@ -11,7 +11,7 @@ from claude_agent_sdk import (
 )
 from dotenv import load_dotenv
 
-load_dotenv("../../.env", override=True)
+load_dotenv("/Users/wuwen/workspace/python/github/harness-frame-action/.env", override=True)
 
 
 async def main():
@@ -86,7 +86,7 @@ async def main():
     # Use it with Claude. allowed_tools pre-approves the tool so it runs
     # without a permission prompt; it does not control tool availability.
     options = ClaudeAgentOptions(
-        cwd="/Users/wuwen/workspace/python/github/harness-frame-action/claude-code-sdk/skilled",
+        cwd="/Users/wuwen/workspace/python/github/harness-frame-action/claude-code-sdk/01_skilled",
         system_prompt=SYSTEM_PROMPT,
         mcp_servers={"tools": websearch_server},
         skills="all",
