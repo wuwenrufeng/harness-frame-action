@@ -30,3 +30,6 @@ claude-code-sdk/data/
 claude-code-sdk/test.txt
 
 claude-code-sdk/01_skilled/data
+
+# 日志
+*.jsonl
