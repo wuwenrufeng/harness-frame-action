@@ -412,6 +412,7 @@ async def run_fresh(prompt: str) -> str:
         agents=build_agents(),
         hooks=BUILD_HOOKS(),
         setting_sources=['local'],
+        max_buffer_size= 32 * 1024 * 1024,
     )
 
     session_id = None
@@ -445,6 +446,7 @@ async def run_resume(session_id: str, follow_up: str) -> None:
         ],
         hooks=BUILD_HOOKS(),
         setting_sources=['local'],
+        max_buffer_size= 32 * 1024 * 1024,
     )
     async with ClaudeSDKClient(options=options) as client:
         await client.query(follow_up)
@@ -467,6 +469,7 @@ async def run_fork(session_id: str, alternative: str) -> str:
         max_turns=5,
         hooks=BUILD_HOOKS(),
         setting_sources=['local'],
+        max_buffer_size= 32 * 1024 * 1024,
     )
     forked_id = None
     async with ClaudeSDKClient(options=options) as client:

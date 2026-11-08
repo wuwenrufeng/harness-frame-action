@@ -426,6 +426,7 @@ async def run_fresh(prompt: str , otel_env: dict[str, str] | None = None) -> str
         hooks=BUILD_HOOKS(),
         setting_sources=['project'], # 只加载 .claude配置，为空时skills将被忽略
         env=otel_env or build_otel_env(),
+        max_buffer_size= 32 * 1024 * 1024,
     )
 
     session_id = None
@@ -464,6 +465,7 @@ async def run_resume(session_id: str, follow_up: str, otel_env: dict[str, str] |
         cwd=os.path.dirname(os.path.abspath(__file__)),
         # 🔧 修复：显式指定全局可用的 skills
         skills="all",
+        max_buffer_size= 32 * 1024 * 1024,
     )
     async with ClaudeSDKClient(options=options) as client:
         await client.query(follow_up)
@@ -491,6 +493,7 @@ async def run_fork(session_id: str, alternative: str, otel_env: dict[str, str] |
         cwd=os.path.dirname(os.path.abspath(__file__)),
         # 🔧 修复：显式指定全局可用的 skills
         skills="all",
+        max_buffer_size= 32 * 1024 * 1024,
     )
     forked_id = None
     async with ClaudeSDKClient(options=options) as client:
