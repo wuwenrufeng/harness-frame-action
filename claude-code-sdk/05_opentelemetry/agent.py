@@ -32,7 +32,9 @@ SYSTEM_PROMPT = """\
 你是燕京啤酒 (000729) 的资深投资分析师。
 分析对象：燕京啤酒 2025 年年报 + 啤酒行业最新动态 + 个股风险信号。
 输出格式：建议关注的核心风险点 / 关键财务异常 / 新增行业利好或利空。
-行为边界：**严禁自行调用 Skills**。 \
+行为边界：
+- **严禁自行调用 Skills**
+- **必须使用子Agent完成任务**
 """
 
 
@@ -183,20 +185,20 @@ async def pre_tool_guard(input_data, tool_use_id, context):
     )
 
     # AgentDefinition 不会禁用内置 agent；在 Agent 工具真正执行前做白名单校验。
-    if tool_name in {"Agent", "Task"}:
-        subagent_type = tool_input.get("subagent_type") or tool_input.get("agent_type", "")
-        if subagent_type not in ALLOWED_SUBAGENTS:
-            return {
-                "systemMessage": (
-                    f"⚠️ 禁止使用未授权的子 agent：{subagent_type or '<missing>'}；"
-                    f"允许的子 agent：{', '.join(sorted(ALLOWED_SUBAGENTS))}"
-                ),
-                "hookSpecificOutput": {
-                    "hookEventName": "PreToolUse",
-                    "permissionDecision": "deny",
-                    "permissionDecisionReason": "Subagent type is not allowlisted",
-                },
-            }
+    # if tool_name in {"Agent", "Task"}:
+    #     subagent_type = tool_input.get("subagent_type") or tool_input.get("agent_type", "")
+    #     if subagent_type not in ALLOWED_SUBAGENTS:
+    #         return {
+    #             "systemMessage": (
+    #                 f"⚠️ 禁止使用未授权的子 agent：{subagent_type or '<missing>'}；"
+    #                 f"允许的子 agent：{', '.join(sorted(ALLOWED_SUBAGENTS))}"
+    #             ),
+    #             "hookSpecificOutput": {
+    #                 "hookEventName": "PreToolUse",
+    #                 "permissionDecision": "deny",
+    #                 "permissionDecisionReason": "Subagent type is not allowlisted",
+    #             },
+    #         }
 
     # 1. 只读工具自动放行
     if tool_name in {"Read", "Glob", "Grep"}:
@@ -384,6 +386,17 @@ def build_otel_env(
         "CLAUDE_CODE_ENABLE_TELEMETRY": "1",
         # 2. Traces 需要 beta 开关
         "CLAUDE_CODE_ENHANCED_TELEMETRY_BETA": "1",
+        # 详细 tracing 会在子 agent 的 LLM span 中写入 query_source（含 agent 名称）。
+        "ENABLE_BETA_TRACING_DETAILED": "1",
+        # 详细 tracing 必须指定独立端点；启用后 logs/traces 会改由此端点导出。
+        # 使用 OTLP/HTTP Collector 的基础地址，由 CLI 按 signal 路由到 /v1/traces、/v1/logs。
+        "BETA_TRACING_ENDPOINT": os.getenv(
+            "BETA_TRACING_ENDPOINT",
+            os.getenv("OTEL_EXPORTER_OTLP_ENDPOINT", "http://127.0.0.1:4318"),
+        ),
+        # Agent 工具 span 增加 subagent_type，例如 financial-analyzer。
+        # 注意：此开关也会导出 Bash 命令、文件路径等工具参数。
+        "OTEL_LOG_TOOL_DETAILS": "1",
         # 3. 为三种信号各选一个 exporter
         "OTEL_TRACES_EXPORTER": "otlp",
         "OTEL_METRICS_EXPORTER": "otlp",

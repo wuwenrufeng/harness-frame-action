@@ -1,0 +1,26 @@
+[
+  {
+    "agent_id": "a9e5934bbdfe444be",
+    "agent_type": "industry-news-collector",
+    "duration_seconds": 197.23,
+    "transcript": "/Users/wuwen/.claude/projects/-Users-wuwen-workspace-python-github-harness-frame-action-claude-code-sdk-05-opentelemetry/628ef310-f686-4f3b-b783-6ff1fcbcea54/subagents/agent-a9e5934bbdfe444be.jsonl",
+    "start_time": "2026-11-08T22:04:56.846529",
+    "end_time": "2026-11-08T22:08:14.079228"
+  },
+  {
+    "agent_id": "aa1bafc4f28c660b6",
+    "agent_type": "a-share-risk-alert",
+    "duration_seconds": 209.46,
+    "transcript": "/Users/wuwen/.claude/projects/-Users-wuwen-workspace-python-github-harness-frame-action-claude-code-sdk-05-opentelemetry/628ef310-f686-4f3b-b783-6ff1fcbcea54/subagents/agent-aa1bafc4f28c660b6.jsonl",
+    "start_time": "2026-11-08T22:04:56.822555",
+    "end_time": "2026-11-08T22:08:26.282467"
+  },
+  {
+    "agent_id": "a79269927186a6252",
+    "agent_type": "financial-analyzer",
+    "duration_seconds": 293.54,
+    "transcript": "/Users/wuwen/.claude/projects/-Users-wuwen-workspace-python-github-harness-frame-action-claude-code-sdk-05-opentelemetry/628ef310-f686-4f3b-b783-6ff1fcbcea54/subagents/agent-a79269927186a6252.jsonl",
+    "start_time": "2026-11-08T22:04:56.822343",
+    "end_time": "2026-11-08T22:09:50.366895"
+  }
+]
