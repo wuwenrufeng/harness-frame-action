@@ -33,3 +33,4 @@ claude-code-sdk/01_skilled/data
 
 # 日志
 *.jsonl
+deepagents/stock_agent/workspace/

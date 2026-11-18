@@ -1,0 +1,7 @@
+# competitor_research 基础依赖
+# 主要用于 parse_competitors.py 的 Markdown/JSON 解析
+# 实际网络搜索由 Agent 的 web_search/web_fetch 工具完成
+
+requests>=2.28.0
+beautifulsoup4>=4.11.0
+lxml>=4.9.0
