@@ -41,7 +41,40 @@ async def can_use_tool(
 
 # Required workaround: dummy hook keeps the stream open for can_use_tool
 async def dummy_hook(input_data, tool_use_id, context):
-    return {"continue_": True}
+    """演示 PreToolUse 的权限决定对 can_use_tool 的影响。
+
+    permissionDecision 为 deny 时，hook 已拒绝工具调用，无需询问用户；
+    为 allow 时，hook 已批准该调用，同样不会进入 can_use_tool。
+    为 ask 时，请求用户审批，由 can_use_tool 处理。
+    仅返回 {"continue_": True} 不作权限决定，继续后续权限检查；
+    如果该调用需要用户审批，才会进入 can_use_tool。
+    """
+    print('dummy_hook called')
+    # return {
+    #     "systemMessage": "⚠️ 禁止调用任何工具",
+    #     "hookSpecificOutput": {
+    #         "hookEventName": "PreToolUse",
+    #         "permissionDecision": "deny",
+    #         "permissionDecisionReason": "Cannot modify protected files",
+    #     },
+    # }
+    # return {
+    #     "continue_": True,
+    #     "systemMessage": "可以调用任何工具",
+    #     "hookSpecificOutput": {
+    #         "hookEventName": "PreToolUse",
+    #         "permissionDecision": "allow",
+    #         "permissionDecisionReason": "approved",
+    #     },
+    # }
+    # return {"continue_": True}
+    return {
+        "hookSpecificOutput": {
+            "hookEventName": "PreToolUse",
+            "permissionDecision": "ask",
+            "permissionDecisionReason": "此操作需要用户审批",
+        }
+    }
 
 
 async def prompt_stream():
